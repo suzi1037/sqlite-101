@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+   <FileVersion major="1" minor="6" />
+   <Project>
+      <Option title="SQLite_f37dd18e3f" />
+      <Option makefile_is_custom="1" />
+      <Option compiler="gcc" />
+      <Option virtualFolders="CMake Files\;" />
+      <Build>
+      <Target title="all">
+         <Option working_dir="/data/RootHome/tmp/tmp.6Okr2tyjWi/cmake-build-debug" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/gmake -f &quot;/data/RootHome/tmp/tmp.6Okr2tyjWi/cmake-build-debug/Makefile&quot;  VERBOSE=1 all" />
+            <CompileFile command="/usr/bin/gmake -f &quot;/data/RootHome/tmp/tmp.6Okr2tyjWi/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/gmake -f &quot;/data/RootHome/tmp/tmp.6Okr2tyjWi/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/gmake -f &quot;/data/RootHome/tmp/tmp.6Okr2tyjWi/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="SQLite_f37dd18e3f">
+         <Option output="/data/RootHome/tmp/tmp.6Okr2tyjWi/cmake-build-debug/SQLite_f37dd18e3f" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/data/RootHome/tmp/tmp.6Okr2tyjWi/cmake-build-debug" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/data/RootHome/tmp/tmp.6Okr2tyjWi/build" />
+            <Add directory="/data/RootHome/tmp/tmp.6Okr2tyjWi/my/demo1" />
+            <Add directory="/data/RootHome/tmp/tmp.6Okr2tyjWi/my/gdbm" />
+            <Add directory="/data/RootHome/tmp/tmp.6Okr2tyjWi/my/gdbm2" />
+            <Add directory="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/src" />
+            <Add directory="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/tool" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/gmake -f &quot;/data/RootHome/tmp/tmp.6Okr2tyjWi/cmake-build-debug/Makefile&quot;  VERBOSE=1 SQLite_f37dd18e3f" />
+            <CompileFile command="/usr/bin/gmake -f &quot;/data/RootHome/tmp/tmp.6Okr2tyjWi/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/gmake -f &quot;/data/RootHome/tmp/tmp.6Okr2tyjWi/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/gmake -f &quot;/data/RootHome/tmp/tmp.6Okr2tyjWi/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="SQLite_f37dd18e3f/fast">
+         <Option output="/data/RootHome/tmp/tmp.6Okr2tyjWi/cmake-build-debug/SQLite_f37dd18e3f" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/data/RootHome/tmp/tmp.6Okr2tyjWi/cmake-build-debug" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/data/RootHome/tmp/tmp.6Okr2tyjWi/build" />
+            <Add directory="/data/RootHome/tmp/tmp.6Okr2tyjWi/my/demo1" />
+            <Add directory="/data/RootHome/tmp/tmp.6Okr2tyjWi/my/gdbm" />
+            <Add directory="/data/RootHome/tmp/tmp.6Okr2tyjWi/my/gdbm2" />
+            <Add directory="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/src" />
+            <Add directory="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/tool" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/gmake -f &quot;/data/RootHome/tmp/tmp.6Okr2tyjWi/cmake-build-debug/Makefile&quot;  VERBOSE=1 SQLite_f37dd18e3f/fast" />
+            <CompileFile command="/usr/bin/gmake -f &quot;/data/RootHome/tmp/tmp.6Okr2tyjWi/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/gmake -f &quot;/data/RootHome/tmp/tmp.6Okr2tyjWi/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/gmake -f &quot;/data/RootHome/tmp/tmp.6Okr2tyjWi/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="rebuild_cache">
+         <Option working_dir="/data/RootHome/tmp/tmp.6Okr2tyjWi/cmake-build-debug" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/gmake -f &quot;/data/RootHome/tmp/tmp.6Okr2tyjWi/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache" />
+            <CompileFile command="/usr/bin/gmake -f &quot;/data/RootHome/tmp/tmp.6Okr2tyjWi/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/gmake -f &quot;/data/RootHome/tmp/tmp.6Okr2tyjWi/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/gmake -f &quot;/data/RootHome/tmp/tmp.6Okr2tyjWi/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      </Build>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/build/lempar.c">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/build/parse.c">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/my/demo1/main.c">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/my/gdbm/gdbm_example.c">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/my/gdbm2/main.c">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/src/build.c">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/src/dbbe.c">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/src/delete.c">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/src/expr.c">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/src/insert.c">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/src/main.c">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/src/select.c">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/src/shell.c">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/src/tclsqlite.c">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/src/tokenize.c">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/src/update.c">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/src/util.c">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/src/vdbe.c">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/src/where.c">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/tool/gdbmdump.c">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/tool/lemon.c">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/tool/lempar.c">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/build/parse.h">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/build/sqlite.h">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/my/gdbm/gbdm.h">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/src/dbbe.h">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/src/sqliteInt.h">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/sqlite/src/vdbe.h">
+      </Unit>
+      <Unit filename="/data/RootHome/tmp/tmp.6Okr2tyjWi/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\" />
+      </Unit>
+   </Project>
+</CodeBlocks_project_file>

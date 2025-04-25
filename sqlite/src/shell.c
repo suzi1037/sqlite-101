@@ -613,7 +613,9 @@ static void do_meta_command(char *zLine, sqlite *db, struct callback_data *p){
   }
 }
 
+// 入口
 int main(int argc, char **argv){
+  // 结构体指针
   sqlite *db;
   char *zErrMsg = 0;
   char *argv0 = argv[0];
@@ -636,7 +638,8 @@ int main(int argc, char **argv){
       data.mode = MODE_Line;
       argc--;
       argv++;
-    }else if( argc>=3 && strcmp(argv[0],"-separator")==0 ){
+    }else if( argc>=3 && strcmp(argv[1],"-separator")==0 ){
+        // app -separator "x" 1.db
       sprintf(data.separator,"%.*s",(int)sizeof(data.separator)-1,argv[2]);
       argc -= 2;
       argv += 2;
