@@ -1,0 +1,5558 @@
+ State 0:
+          input ::= * cmdlist
+          input ::= * END_OF_FILE ILLEGAL SPACE UNCLOSED_STRING COMMENT FUNCTION UMINUS COLUMN AGG_FUNCTION
+          cmdlist ::= * ecmd
+          cmdlist ::= * cmdlist SEMI ecmd
+          ecmd ::= * explain cmd
+          ecmd ::= * cmd
+      (6) ecmd ::= *
+          explain ::= * EXPLAIN
+          cmd ::= * create_table create_table_args
+          create_table ::= * CREATE TABLE id
+          cmd ::= * DROP TABLE id
+          cmd ::= * select
+          select ::= * oneselect
+          select ::= * select joinop oneselect
+          oneselect ::= * SELECT distinct selcollist from where_opt groupby_opt having_opt orderby_opt
+          cmd ::= * DELETE FROM id where_opt
+          cmd ::= * UPDATE id SET setlist where_opt
+          cmd ::= * INSERT INTO id inscollist_opt VALUES LP itemlist RP
+          cmd ::= * INSERT INTO id inscollist_opt select
+          cmd ::= * CREATE uniqueflag INDEX id ON id LP idxlist RP
+          cmd ::= * DROP INDEX id
+          cmd ::= * COPY id FROM id USING DELIMITERS STRING
+          cmd ::= * COPY id FROM id
+          cmd ::= * VACUUM
+          cmd ::= * VACUUM id
+
+                          COPY shift  284
+                        CREATE shift  222
+                        DELETE shift  240
+                          DROP shift  234
+                   END_OF_FILE shift  295
+                       EXPLAIN shift  294
+                        INSERT shift  256
+                        SELECT shift  41
+                        UPDATE shift  244
+                        VACUUM shift  291
+                           cmd shift  293
+                       cmdlist shift  1
+                  create_table shift  6
+                          ecmd shift  304
+                       explain shift  4
+                         input accept
+                     oneselect shift  37
+                        select shift  239
+                     {default} reduce 6
+
+State 1:
+      (0) input ::= cmdlist *
+          cmdlist ::= cmdlist * SEMI ecmd
+
+                             $ reduce 0
+                          SEMI shift  2
+
+State 2:
+          cmdlist ::= cmdlist SEMI * ecmd
+          ecmd ::= * explain cmd
+          ecmd ::= * cmd
+      (6) ecmd ::= *
+          explain ::= * EXPLAIN
+          cmd ::= * create_table create_table_args
+          create_table ::= * CREATE TABLE id
+          cmd ::= * DROP TABLE id
+          cmd ::= * select
+          select ::= * oneselect
+          select ::= * select joinop oneselect
+          oneselect ::= * SELECT distinct selcollist from where_opt groupby_opt having_opt orderby_opt
+          cmd ::= * DELETE FROM id where_opt
+          cmd ::= * UPDATE id SET setlist where_opt
+          cmd ::= * INSERT INTO id inscollist_opt VALUES LP itemlist RP
+          cmd ::= * INSERT INTO id inscollist_opt select
+          cmd ::= * CREATE uniqueflag INDEX id ON id LP idxlist RP
+          cmd ::= * DROP INDEX id
+          cmd ::= * COPY id FROM id USING DELIMITERS STRING
+          cmd ::= * COPY id FROM id
+          cmd ::= * VACUUM
+          cmd ::= * VACUUM id
+
+                          COPY shift  284
+                        CREATE shift  222
+                        DELETE shift  240
+                          DROP shift  234
+                       EXPLAIN shift  294
+                        INSERT shift  256
+                        SELECT shift  41
+                        UPDATE shift  244
+                        VACUUM shift  291
+                           cmd shift  293
+                  create_table shift  6
+                          ecmd shift  3
+                       explain shift  4
+                     oneselect shift  37
+                        select shift  239
+                     {default} reduce 6
+
+State 3:
+      (3) cmdlist ::= cmdlist SEMI ecmd *
+
+                     {default} reduce 3
+
+State 4:
+          ecmd ::= explain * cmd
+          cmd ::= * create_table create_table_args
+          create_table ::= * CREATE TABLE id
+          cmd ::= * DROP TABLE id
+          cmd ::= * select
+          select ::= * oneselect
+          select ::= * select joinop oneselect
+          oneselect ::= * SELECT distinct selcollist from where_opt groupby_opt having_opt orderby_opt
+          cmd ::= * DELETE FROM id where_opt
+          cmd ::= * UPDATE id SET setlist where_opt
+          cmd ::= * INSERT INTO id inscollist_opt VALUES LP itemlist RP
+          cmd ::= * INSERT INTO id inscollist_opt select
+          cmd ::= * CREATE uniqueflag INDEX id ON id LP idxlist RP
+          cmd ::= * DROP INDEX id
+          cmd ::= * COPY id FROM id USING DELIMITERS STRING
+          cmd ::= * COPY id FROM id
+          cmd ::= * VACUUM
+          cmd ::= * VACUUM id
+
+                          COPY shift  284
+                        CREATE shift  222
+                        DELETE shift  240
+                          DROP shift  234
+                        INSERT shift  256
+                        SELECT shift  41
+                        UPDATE shift  244
+                        VACUUM shift  291
+                           cmd shift  5
+                  create_table shift  6
+                     oneselect shift  37
+                        select shift  239
+
+State 5:
+      (4) ecmd ::= explain cmd *
+
+                     {default} reduce 4
+
+State 6:
+          cmd ::= create_table * create_table_args
+          create_table_args ::= * LP columnlist conslist_opt RP
+
+                            LP shift  8
+             create_table_args shift  7
+
+State 7:
+      (8) cmd ::= create_table create_table_args *
+
+                     {default} reduce 8
+
+State 8:
+          create_table_args ::= LP * columnlist conslist_opt RP
+          columnlist ::= * columnlist COMMA column
+          columnlist ::= * column
+          column ::= * columnid type carglist
+          columnid ::= * id
+          id ::= * ID
+          id ::= * STRING
+
+                            ID shift  19
+                        STRING shift  20
+                        column shift  221
+                      columnid shift  14
+                    columnlist shift  9
+                            id shift  194
+
+State 9:
+          create_table_args ::= LP columnlist * conslist_opt RP
+          columnlist ::= columnlist * COMMA column
+     (42) conslist_opt ::= *
+          conslist_opt ::= * COMMA conslist
+
+                         COMMA shift  12
+                            RP reduce 42
+                  conslist_opt shift  10
+
+State 10:
+          create_table_args ::= LP columnlist conslist_opt * RP
+
+                            RP shift  11
+
+State 11:
+     (10) create_table_args ::= LP columnlist conslist_opt RP *
+
+                     {default} reduce 10
+
+State 12:
+          columnlist ::= columnlist COMMA * column
+          column ::= * columnid type carglist
+          columnid ::= * id
+          id ::= * ID
+          id ::= * STRING
+          conslist_opt ::= COMMA * conslist
+          conslist ::= * conslist COMMA tcons
+          conslist ::= * tcons
+          tcons ::= * CONSTRAINT id tcons2
+          tcons ::= * tcons2
+          tcons2 ::= * PRIMARY KEY LP idxlist RP
+          tcons2 ::= * UNIQUE LP idlist RP
+          tcons2 ::= * CHECK expr
+
+                         CHECK shift  217
+                    CONSTRAINT shift  198
+                            ID shift  19
+                       PRIMARY shift  201
+                        STRING shift  20
+                        UNIQUE shift  210
+                        column shift  13
+                      columnid shift  14
+                      conslist shift  195
+                            id shift  194
+                         tcons shift  220
+                        tcons2 shift  219
+
+State 13:
+     (11) columnlist ::= columnlist COMMA column *
+
+                     {default} reduce 11
+
+State 14:
+          column ::= columnid * type carglist
+          id ::= * ID
+          id ::= * STRING
+          type ::= * typename
+          type ::= * typename LP signed RP
+          type ::= * typename LP signed COMMA signed RP
+          typename ::= * id
+          typename ::= * typename id
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  193
+                          type shift  15
+                      typename shift  180
+
+State 15:
+          column ::= columnid type * carglist
+          carglist ::= * carglist carg
+     (26) carglist ::= *
+
+                      carglist shift  16
+                     {default} reduce 26
+
+State 16:
+     (13) column ::= columnid type carglist *
+          carglist ::= carglist * carg
+          carg ::= * CONSTRAINT id ccons
+          carg ::= * ccons
+          carg ::= * DEFAULT STRING
+          carg ::= * DEFAULT ID
+          carg ::= * DEFAULT INTEGER
+          carg ::= * DEFAULT PLUS INTEGER
+          carg ::= * DEFAULT MINUS INTEGER
+          carg ::= * DEFAULT FLOAT
+          carg ::= * DEFAULT PLUS FLOAT
+          carg ::= * DEFAULT MINUS FLOAT
+          carg ::= * DEFAULT NULL
+          ccons ::= * NOT NULL
+          ccons ::= * PRIMARY KEY sortorder
+          ccons ::= * UNIQUE
+          ccons ::= * CHECK LP expr RP
+
+                         CHECK shift  31
+                    CONSTRAINT shift  18
+                       DEFAULT shift  168
+                           NOT shift  23
+                       PRIMARY shift  25
+                        UNIQUE shift  30
+                          carg shift  17
+                         ccons shift  167
+                     {default} reduce 13
+
+State 17:
+     (25) carglist ::= carglist carg *
+
+                     {default} reduce 25
+
+State 18:
+          id ::= * ID
+          id ::= * STRING
+          carg ::= CONSTRAINT * id ccons
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  21
+
+State 19:
+     (15) id ::= ID *
+
+                     {default} reduce 15
+
+State 20:
+     (16) id ::= STRING *
+
+                     {default} reduce 16
+
+State 21:
+          carg ::= CONSTRAINT id * ccons
+          ccons ::= * NOT NULL
+          ccons ::= * PRIMARY KEY sortorder
+          ccons ::= * UNIQUE
+          ccons ::= * CHECK LP expr RP
+
+                         CHECK shift  31
+                           NOT shift  23
+                       PRIMARY shift  25
+                        UNIQUE shift  30
+                         ccons shift  22
+
+State 22:
+     (27) carg ::= CONSTRAINT id ccons *
+
+                     {default} reduce 27
+
+State 23:
+          ccons ::= NOT * NULL
+
+                          NULL shift  24
+
+State 24:
+     (38) ccons ::= NOT NULL *
+
+                     {default} reduce 38
+
+State 25:
+          ccons ::= PRIMARY * KEY sortorder
+
+                           KEY shift  26
+
+State 26:
+          ccons ::= PRIMARY KEY * sortorder
+          sortorder ::= * ASC
+          sortorder ::= * DESC
+     (84) sortorder ::= *
+
+                           ASC shift  28
+                          DESC shift  29
+                     sortorder shift  27
+                     {default} reduce 84
+
+State 27:
+     (39) ccons ::= PRIMARY KEY sortorder *
+
+                     {default} reduce 39
+
+State 28:
+     (82) sortorder ::= ASC *
+
+                     {default} reduce 82
+
+State 29:
+     (83) sortorder ::= DESC *
+
+                     {default} reduce 83
+
+State 30:
+     (40) ccons ::= UNIQUE *
+
+                     {default} reduce 40
+
+State 31:
+          ccons ::= CHECK * LP expr RP
+
+                            LP shift  32
+
+State 32:
+          id ::= * ID
+          id ::= * STRING
+          ccons ::= CHECK LP * expr RP
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  165
+                            id shift  58
+
+State 33:
+     (15) id ::= ID *
+    (112) expr ::= ID *
+          expr ::= ID * LP exprlist RP
+          expr ::= ID * LP STAR RP
+
+                             $ reduce 112
+                           AND reduce 112
+                            AS reduce 112
+                           ASC reduce 112
+                       BETWEEN reduce 112
+                         COMMA reduce 112
+                        CONCAT reduce 112
+                          DESC reduce 112
+                           DOT reduce 15
+                            EQ reduce 112
+                        EXCEPT reduce 112
+                          FROM reduce 112
+                            GE reduce 112
+                          GLOB reduce 112
+                         GROUP reduce 112
+                            GT reduce 112
+                        HAVING reduce 112
+                            ID reduce 112
+                            IN reduce 112
+                     INTERSECT reduce 112
+                        ISNULL reduce 112
+                            LE reduce 112
+                          LIKE reduce 112
+                            LP shift  34
+                            LT reduce 112
+                         MINUS reduce 112
+                            NE reduce 112
+                           NOT reduce 112
+                       NOTNULL reduce 112
+                            OR reduce 112
+                         ORDER reduce 112
+                          PLUS reduce 112
+                            RP reduce 112
+                          SEMI reduce 112
+                         SLASH reduce 112
+                          STAR reduce 112
+                        STRING reduce 112
+                         UNION reduce 112
+                         WHERE reduce 112
+
+State 34:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= ID LP * exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= ID LP * STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+          exprlist ::= * exprlist COMMA expritem
+          exprlist ::= * expritem
+          expritem ::= * expr
+    (152) expritem ::= *
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                          STAR shift  163
+                        STRING shift  35
+                          expr shift  109
+                      expritem shift  120
+                      exprlist shift  161
+                            id shift  58
+                     {default} reduce 152
+
+State 35:
+     (16) id ::= STRING *
+    (117) expr ::= STRING *
+
+                             $ reduce 117
+                           AND reduce 117
+                            AS reduce 117
+                           ASC reduce 117
+                       BETWEEN reduce 117
+                         COMMA reduce 117
+                        CONCAT reduce 117
+                          DESC reduce 117
+                           DOT reduce 16
+                            EQ reduce 117
+                        EXCEPT reduce 117
+                          FROM reduce 117
+                            GE reduce 117
+                          GLOB reduce 117
+                         GROUP reduce 117
+                            GT reduce 117
+                        HAVING reduce 117
+                            ID reduce 117
+                            IN reduce 117
+                     INTERSECT reduce 117
+                        ISNULL reduce 117
+                            LE reduce 117
+                          LIKE reduce 117
+                            LT reduce 117
+                         MINUS reduce 117
+                            NE reduce 117
+                           NOT reduce 117
+                       NOTNULL reduce 117
+                            OR reduce 117
+                         ORDER reduce 117
+                          PLUS reduce 117
+                            RP reduce 117
+                          SEMI reduce 117
+                         SLASH reduce 117
+                          STAR reduce 117
+                        STRING reduce 117
+                         UNION reduce 117
+                         WHERE reduce 117
+
+State 36:
+          id ::= * ID
+          id ::= * STRING
+          select ::= * oneselect
+          select ::= * select joinop oneselect
+          oneselect ::= * SELECT distinct selcollist from where_opt groupby_opt having_opt orderby_opt
+          expr ::= * LP expr RP
+          expr ::= LP * expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= LP * select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        SELECT shift  41
+                        STRING shift  35
+                          expr shift  159
+                            id shift  58
+                     oneselect shift  37
+                        select shift  38
+
+State 37:
+     (55) select ::= oneselect *
+
+                     {default} reduce 55
+
+State 38:
+          select ::= select * joinop oneselect
+          joinop ::= * UNION
+          joinop ::= * UNION ALL
+          joinop ::= * INTERSECT
+          joinop ::= * EXCEPT
+          expr ::= LP select * RP
+
+                        EXCEPT shift  107
+                     INTERSECT shift  106
+                            RP shift  158
+                         UNION shift  104
+                        joinop shift  39
+
+State 39:
+          select ::= select joinop * oneselect
+          oneselect ::= * SELECT distinct selcollist from where_opt groupby_opt having_opt orderby_opt
+
+                        SELECT shift  41
+                     oneselect shift  40
+
+State 40:
+     (56) select ::= select joinop oneselect *
+
+                     {default} reduce 56
+
+State 41:
+          oneselect ::= SELECT * distinct selcollist from where_opt groupby_opt having_opt orderby_opt
+          distinct ::= * DISTINCT
+          distinct ::= * ALL
+     (64) distinct ::= *
+
+                           ALL shift  157
+                      DISTINCT shift  156
+                      distinct shift  42
+                     {default} reduce 64
+
+State 42:
+          oneselect ::= SELECT distinct * selcollist from where_opt groupby_opt having_opt orderby_opt
+          sclp ::= * selcollist COMMA
+     (66) sclp ::= *
+          selcollist ::= * STAR
+          selcollist ::= * sclp expr
+          selcollist ::= * sclp expr as id
+
+                          STAR shift  151
+                          sclp shift  152
+                    selcollist shift  43
+                     {default} reduce 66
+
+State 43:
+          oneselect ::= SELECT distinct selcollist * from where_opt groupby_opt having_opt orderby_opt
+          sclp ::= selcollist * COMMA
+          from ::= * FROM seltablist
+
+                         COMMA shift  142
+                          FROM shift  143
+                          from shift  44
+
+State 44:
+          oneselect ::= SELECT distinct selcollist from * where_opt groupby_opt having_opt orderby_opt
+     (90) where_opt ::= *
+          where_opt ::= * WHERE expr
+
+                         WHERE shift  140
+                     where_opt shift  45
+                     {default} reduce 90
+
+State 45:
+          oneselect ::= SELECT distinct selcollist from where_opt * groupby_opt having_opt orderby_opt
+     (85) groupby_opt ::= *
+          groupby_opt ::= * GROUP BY exprlist
+
+                         GROUP shift  137
+                   groupby_opt shift  46
+                     {default} reduce 85
+
+State 46:
+          oneselect ::= SELECT distinct selcollist from where_opt groupby_opt * having_opt orderby_opt
+     (87) having_opt ::= *
+          having_opt ::= * HAVING expr
+
+                        HAVING shift  135
+                    having_opt shift  47
+                     {default} reduce 87
+
+State 47:
+          oneselect ::= SELECT distinct selcollist from where_opt groupby_opt having_opt * orderby_opt
+     (77) orderby_opt ::= *
+          orderby_opt ::= * ORDER BY sortlist
+
+                         ORDER shift  49
+                   orderby_opt shift  48
+                     {default} reduce 77
+
+State 48:
+     (61) oneselect ::= SELECT distinct selcollist from where_opt groupby_opt having_opt orderby_opt *
+
+                     {default} reduce 61
+
+State 49:
+          orderby_opt ::= ORDER * BY sortlist
+
+                            BY shift  50
+
+State 50:
+          id ::= * ID
+          id ::= * STRING
+          orderby_opt ::= ORDER BY * sortlist
+          sortlist ::= * sortlist COMMA sortitem sortorder
+          sortlist ::= * sortitem sortorder
+          sortitem ::= * expr
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  55
+                            id shift  58
+                      sortitem shift  133
+                      sortlist shift  51
+
+State 51:
+     (78) orderby_opt ::= ORDER BY sortlist *
+          sortlist ::= sortlist * COMMA sortitem sortorder
+
+                         COMMA shift  52
+                     {default} reduce 78
+
+State 52:
+          id ::= * ID
+          id ::= * STRING
+          sortlist ::= sortlist COMMA * sortitem sortorder
+          sortitem ::= * expr
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  55
+                            id shift  58
+                      sortitem shift  53
+
+State 53:
+          sortlist ::= sortlist COMMA sortitem * sortorder
+          sortorder ::= * ASC
+          sortorder ::= * DESC
+     (84) sortorder ::= *
+
+                           ASC shift  28
+                          DESC shift  29
+                     sortorder shift  54
+                     {default} reduce 84
+
+State 54:
+     (79) sortlist ::= sortlist COMMA sortitem sortorder *
+
+                     {default} reduce 79
+
+State 55:
+     (81) sortitem ::= expr *
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                           AND shift  56
+                       BETWEEN shift  97
+                        CONCAT shift  93
+                            EQ shift  76
+                            GE shift  72
+                          GLOB shift  83
+                            GT shift  68
+                            IN shift  101
+                        ISNULL shift  95
+                            LE shift  70
+                          LIKE shift  78
+                            LT shift  66
+                         MINUS shift  87
+                            NE shift  74
+                           NOT shift  80
+                       NOTNULL shift  96
+                            OR shift  64
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+                     {default} reduce 81
+
+State 56:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= expr AND * expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  63
+                            id shift  58
+
+State 57:
+    (113) expr ::= NULL *
+
+                     {default} reduce 113
+
+State 58:
+          expr ::= id * DOT id
+
+                           DOT shift  59
+
+State 59:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= id DOT * id
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  60
+
+State 60:
+    (114) expr ::= id DOT id *
+
+                     {default} reduce 114
+
+State 61:
+    (115) expr ::= INTEGER *
+
+                     {default} reduce 115
+
+State 62:
+    (116) expr ::= FLOAT *
+
+                     {default} reduce 116
+
+State 63:
+          expr ::= expr * AND expr
+    (120) expr ::= expr AND expr *
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                       BETWEEN shift  97
+                        CONCAT shift  93
+                            EQ shift  76
+                            GE shift  72
+                          GLOB shift  83
+                            GT shift  68
+                            IN shift  101
+                        ISNULL shift  95
+                            LE shift  70
+                          LIKE shift  78
+                            LT shift  66
+                         MINUS shift  87
+                            NE shift  74
+                           NOT shift  80
+                       NOTNULL shift  96
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+                     {default} reduce 120
+
+State 64:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= expr OR * expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  65
+                            id shift  58
+
+State 65:
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+    (121) expr ::= expr OR expr *
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                           AND shift  56
+                       BETWEEN shift  97
+                        CONCAT shift  93
+                            EQ shift  76
+                            GE shift  72
+                          GLOB shift  83
+                            GT shift  68
+                            IN shift  101
+                        ISNULL shift  95
+                            LE shift  70
+                          LIKE shift  78
+                            LT shift  66
+                         MINUS shift  87
+                            NE shift  74
+                           NOT shift  80
+                       NOTNULL shift  96
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+                     {default} reduce 121
+
+State 66:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= expr LT * expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  67
+                            id shift  58
+
+State 67:
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+    (122) expr ::= expr LT expr *
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                        CONCAT shift  93
+                         MINUS shift  87
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+                     {default} reduce 122
+
+State 68:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= expr GT * expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  69
+                            id shift  58
+
+State 69:
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+    (123) expr ::= expr GT expr *
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                        CONCAT shift  93
+                         MINUS shift  87
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+                     {default} reduce 123
+
+State 70:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= expr LE * expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  71
+                            id shift  58
+
+State 71:
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+    (124) expr ::= expr LE expr *
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                        CONCAT shift  93
+                         MINUS shift  87
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+                     {default} reduce 124
+
+State 72:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= expr GE * expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  73
+                            id shift  58
+
+State 73:
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+    (125) expr ::= expr GE expr *
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                        CONCAT shift  93
+                         MINUS shift  87
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+                     {default} reduce 125
+
+State 74:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= expr NE * expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  75
+                            id shift  58
+
+State 75:
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+    (126) expr ::= expr NE expr *
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                        CONCAT shift  93
+                            GE shift  72
+                            GT shift  68
+                            LE shift  70
+                            LT shift  66
+                         MINUS shift  87
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+                     {default} reduce 126
+
+State 76:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= expr EQ * expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  77
+                            id shift  58
+
+State 77:
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+    (127) expr ::= expr EQ expr *
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                        CONCAT shift  93
+                            GE shift  72
+                            GT shift  68
+                            LE shift  70
+                            LT shift  66
+                         MINUS shift  87
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+                     {default} reduce 127
+
+State 78:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= expr LIKE * expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  79
+                            id shift  58
+
+State 79:
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+    (128) expr ::= expr LIKE expr *
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                        CONCAT shift  93
+                            GE shift  72
+                            GT shift  68
+                            LE shift  70
+                            LT shift  66
+                         MINUS shift  87
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+                     {default} reduce 128
+
+State 80:
+          expr ::= expr NOT * LIKE expr
+          expr ::= expr NOT * GLOB expr
+          expr ::= expr NOT * BETWEEN expr AND expr
+          expr ::= expr NOT * IN LP exprlist RP
+          expr ::= expr NOT * IN LP select RP
+
+                       BETWEEN shift  123
+                          GLOB shift  121
+                            IN shift  127
+                          LIKE shift  81
+
+State 81:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= expr NOT LIKE * expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  82
+                            id shift  58
+
+State 82:
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+    (129) expr ::= expr NOT LIKE expr *
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                       BETWEEN shift  97
+                        CONCAT shift  93
+                            EQ shift  76
+                            GE shift  72
+                          GLOB shift  83
+                            GT shift  68
+                            IN shift  101
+                        ISNULL shift  95
+                            LE shift  70
+                          LIKE shift  78
+                            LT shift  66
+                         MINUS shift  87
+                            NE shift  74
+                           NOT shift  80
+                       NOTNULL shift  96
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+                     {default} reduce 129
+
+State 83:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= expr GLOB * expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  84
+                            id shift  58
+
+State 84:
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+    (130) expr ::= expr GLOB expr *
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                        CONCAT shift  93
+                            GE shift  72
+                            GT shift  68
+                            LE shift  70
+                            LT shift  66
+                         MINUS shift  87
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+                     {default} reduce 130
+
+State 85:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= expr PLUS * expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  86
+                            id shift  58
+
+State 86:
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+    (132) expr ::= expr PLUS expr *
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                        CONCAT shift  93
+                         SLASH shift  91
+                          STAR shift  89
+                     {default} reduce 132
+
+State 87:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= expr MINUS * expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  88
+                            id shift  58
+
+State 88:
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+    (133) expr ::= expr MINUS expr *
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                        CONCAT shift  93
+                         SLASH shift  91
+                          STAR shift  89
+                     {default} reduce 133
+
+State 89:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= expr STAR * expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  90
+                            id shift  58
+
+State 90:
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+    (134) expr ::= expr STAR expr *
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                        CONCAT shift  93
+                     {default} reduce 134
+
+State 91:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= expr SLASH * expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  92
+                            id shift  58
+
+State 92:
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+    (135) expr ::= expr SLASH expr *
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                        CONCAT shift  93
+                     {default} reduce 135
+
+State 93:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= expr CONCAT * expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  94
+                            id shift  58
+
+State 94:
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+    (136) expr ::= expr CONCAT expr *
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                     {default} reduce 136
+
+State 95:
+    (137) expr ::= expr ISNULL *
+
+                     {default} reduce 137
+
+State 96:
+    (138) expr ::= expr NOTNULL *
+
+                     {default} reduce 138
+
+State 97:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= expr BETWEEN * expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  98
+                            id shift  58
+
+State 98:
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr BETWEEN expr * AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                           AND shift  99
+                       BETWEEN shift  97
+                        CONCAT shift  93
+                            EQ shift  76
+                            GE shift  72
+                          GLOB shift  83
+                            GT shift  68
+                            IN shift  101
+                        ISNULL shift  95
+                            LE shift  70
+                          LIKE shift  78
+                            LT shift  66
+                         MINUS shift  87
+                            NE shift  74
+                           NOT shift  80
+                       NOTNULL shift  96
+                            OR shift  64
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+
+State 99:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= expr AND * expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= expr BETWEEN expr AND * expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  100
+                            id shift  58
+
+State 100:
+          expr ::= expr * AND expr
+    (120) expr ::= expr AND expr *
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+    (143) expr ::= expr BETWEEN expr AND expr *
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                             $ reduce 143
+                           AND reduce 120
+                           AND reduce 143
+                            AS reduce 143
+                           ASC reduce 143
+                       BETWEEN reduce 143
+                         COMMA reduce 143
+                        CONCAT shift  93
+                          DESC reduce 143
+                            EQ reduce 143
+                        EXCEPT reduce 143
+                          FROM reduce 143
+                            GE shift  72
+                          GLOB reduce 143
+                         GROUP reduce 143
+                            GT shift  68
+                        HAVING reduce 143
+                            ID reduce 143
+                            IN reduce 143
+                     INTERSECT reduce 143
+                        ISNULL reduce 143
+                            LE shift  70
+                          LIKE reduce 143
+                            LT shift  66
+                         MINUS shift  87
+                            NE reduce 143
+                           NOT reduce 143
+                       NOTNULL reduce 143
+                            OR reduce 120
+                            OR reduce 143
+                         ORDER reduce 143
+                          PLUS shift  85
+                            RP reduce 143
+                          SEMI reduce 143
+                         SLASH shift  91
+                          STAR shift  89
+                        STRING reduce 143
+                         UNION reduce 143
+                         WHERE reduce 143
+
+State 101:
+          expr ::= expr IN * LP exprlist RP
+          expr ::= expr IN * LP select RP
+
+                            LP shift  102
+
+State 102:
+          id ::= * ID
+          id ::= * STRING
+          select ::= * oneselect
+          select ::= * select joinop oneselect
+          oneselect ::= * SELECT distinct selcollist from where_opt groupby_opt having_opt orderby_opt
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= expr IN LP * exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= expr IN LP * select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+          exprlist ::= * exprlist COMMA expritem
+          exprlist ::= * expritem
+          expritem ::= * expr
+    (152) expritem ::= *
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        SELECT shift  41
+                        STRING shift  35
+                          expr shift  109
+                      expritem shift  120
+                      exprlist shift  116
+                            id shift  58
+                     oneselect shift  37
+                        select shift  103
+                     {default} reduce 152
+
+State 103:
+          select ::= select * joinop oneselect
+          joinop ::= * UNION
+          joinop ::= * UNION ALL
+          joinop ::= * INTERSECT
+          joinop ::= * EXCEPT
+          expr ::= expr IN LP select * RP
+
+                        EXCEPT shift  107
+                     INTERSECT shift  106
+                            RP shift  108
+                         UNION shift  104
+                        joinop shift  39
+
+State 104:
+     (57) joinop ::= UNION *
+          joinop ::= UNION * ALL
+
+                           ALL shift  105
+                        SELECT reduce 57
+
+State 105:
+     (58) joinop ::= UNION ALL *
+
+                        SELECT reduce 58
+
+State 106:
+     (59) joinop ::= INTERSECT *
+
+                        SELECT reduce 59
+
+State 107:
+     (60) joinop ::= EXCEPT *
+
+                        SELECT reduce 60
+
+State 108:
+    (146) expr ::= expr IN LP select RP *
+
+                     {default} reduce 146
+
+State 109:
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+    (151) expritem ::= expr *
+
+                           AND shift  56
+                       BETWEEN shift  97
+                        CONCAT shift  93
+                            EQ shift  76
+                            GE shift  72
+                          GLOB shift  83
+                            GT shift  68
+                            IN shift  101
+                        ISNULL shift  95
+                            LE shift  70
+                          LIKE shift  78
+                            LT shift  66
+                         MINUS shift  87
+                            NE shift  74
+                           NOT shift  80
+                       NOTNULL shift  96
+                            OR shift  64
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+                     {default} reduce 151
+
+State 110:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= NOT * expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  111
+                            id shift  58
+
+State 111:
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+    (139) expr ::= NOT expr *
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                       BETWEEN shift  97
+                        CONCAT shift  93
+                            EQ shift  76
+                            GE shift  72
+                          GLOB shift  83
+                            GT shift  68
+                            IN shift  101
+                        ISNULL shift  95
+                            LE shift  70
+                          LIKE shift  78
+                            LT shift  66
+                         MINUS shift  87
+                            NE shift  74
+                           NOT shift  80
+                       NOTNULL shift  96
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+                     {default} reduce 139
+
+State 112:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= MINUS * expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  113
+                            id shift  58
+
+State 113:
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+    (140) expr ::= MINUS expr *
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                     {default} reduce 140
+
+State 114:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= PLUS * expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  115
+                            id shift  58
+
+State 115:
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+    (141) expr ::= PLUS expr *
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                     {default} reduce 141
+
+State 116:
+          expr ::= expr IN LP exprlist * RP
+          exprlist ::= exprlist * COMMA expritem
+
+                         COMMA shift  118
+                            RP shift  117
+
+State 117:
+    (145) expr ::= expr IN LP exprlist RP *
+
+                     {default} reduce 145
+
+State 118:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+          exprlist ::= exprlist COMMA * expritem
+          expritem ::= * expr
+    (152) expritem ::= *
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  109
+                      expritem shift  119
+                            id shift  58
+                     {default} reduce 152
+
+State 119:
+    (149) exprlist ::= exprlist COMMA expritem *
+
+                     {default} reduce 149
+
+State 120:
+    (150) exprlist ::= expritem *
+
+                     {default} reduce 150
+
+State 121:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= expr NOT GLOB * expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  122
+                            id shift  58
+
+State 122:
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+    (131) expr ::= expr NOT GLOB expr *
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                       BETWEEN shift  97
+                        CONCAT shift  93
+                            EQ shift  76
+                            GE shift  72
+                          GLOB shift  83
+                            GT shift  68
+                            IN shift  101
+                        ISNULL shift  95
+                            LE shift  70
+                          LIKE shift  78
+                            LT shift  66
+                         MINUS shift  87
+                            NE shift  74
+                           NOT shift  80
+                       NOTNULL shift  96
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+                     {default} reduce 131
+
+State 123:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= expr NOT BETWEEN * expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  124
+                            id shift  58
+
+State 124:
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr NOT BETWEEN expr * AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                           AND shift  125
+                       BETWEEN shift  97
+                        CONCAT shift  93
+                            EQ shift  76
+                            GE shift  72
+                          GLOB shift  83
+                            GT shift  68
+                            IN shift  101
+                        ISNULL shift  95
+                            LE shift  70
+                          LIKE shift  78
+                            LT shift  66
+                         MINUS shift  87
+                            NE shift  74
+                           NOT shift  80
+                       NOTNULL shift  96
+                            OR shift  64
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+
+State 125:
+          id ::= * ID
+          id ::= * STRING
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= expr AND * expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= expr NOT BETWEEN expr AND * expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  126
+                            id shift  58
+
+State 126:
+          expr ::= expr * AND expr
+    (120) expr ::= expr AND expr *
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+    (144) expr ::= expr NOT BETWEEN expr AND expr *
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                             $ reduce 144
+                           AND reduce 120
+                           AND reduce 144
+                            AS reduce 144
+                           ASC reduce 144
+                       BETWEEN shift  97
+                         COMMA reduce 144
+                        CONCAT shift  93
+                          DESC reduce 144
+                            EQ shift  76
+                        EXCEPT reduce 144
+                          FROM reduce 144
+                            GE shift  72
+                          GLOB shift  83
+                         GROUP reduce 144
+                            GT shift  68
+                        HAVING reduce 144
+                            ID reduce 144
+                            IN shift  101
+                     INTERSECT reduce 144
+                        ISNULL shift  95
+                            LE shift  70
+                          LIKE shift  78
+                            LT shift  66
+                         MINUS shift  87
+                            NE shift  74
+                           NOT shift  80
+                       NOTNULL shift  96
+                            OR reduce 120
+                            OR reduce 144
+                         ORDER reduce 144
+                          PLUS shift  85
+                            RP reduce 144
+                          SEMI reduce 144
+                         SLASH shift  91
+                          STAR shift  89
+                        STRING reduce 144
+                         UNION reduce 144
+                         WHERE reduce 144
+
+State 127:
+          expr ::= expr NOT IN * LP exprlist RP
+          expr ::= expr NOT IN * LP select RP
+
+                            LP shift  128
+
+State 128:
+          id ::= * ID
+          id ::= * STRING
+          select ::= * oneselect
+          select ::= * select joinop oneselect
+          oneselect ::= * SELECT distinct selcollist from where_opt groupby_opt having_opt orderby_opt
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= expr NOT IN LP * exprlist RP
+          expr ::= * expr NOT IN LP select RP
+          expr ::= expr NOT IN LP * select RP
+          exprlist ::= * exprlist COMMA expritem
+          exprlist ::= * expritem
+          expritem ::= * expr
+    (152) expritem ::= *
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        SELECT shift  41
+                        STRING shift  35
+                          expr shift  109
+                      expritem shift  120
+                      exprlist shift  131
+                            id shift  58
+                     oneselect shift  37
+                        select shift  129
+                     {default} reduce 152
+
+State 129:
+          select ::= select * joinop oneselect
+          joinop ::= * UNION
+          joinop ::= * UNION ALL
+          joinop ::= * INTERSECT
+          joinop ::= * EXCEPT
+          expr ::= expr NOT IN LP select * RP
+
+                        EXCEPT shift  107
+                     INTERSECT shift  106
+                            RP shift  130
+                         UNION shift  104
+                        joinop shift  39
+
+State 130:
+    (148) expr ::= expr NOT IN LP select RP *
+
+                     {default} reduce 148
+
+State 131:
+          expr ::= expr NOT IN LP exprlist * RP
+          exprlist ::= exprlist * COMMA expritem
+
+                         COMMA shift  118
+                            RP shift  132
+
+State 132:
+    (147) expr ::= expr NOT IN LP exprlist RP *
+
+                     {default} reduce 147
+
+State 133:
+          sortlist ::= sortitem * sortorder
+          sortorder ::= * ASC
+          sortorder ::= * DESC
+     (84) sortorder ::= *
+
+                           ASC shift  28
+                          DESC shift  29
+                     sortorder shift  134
+                     {default} reduce 84
+
+State 134:
+     (80) sortlist ::= sortitem sortorder *
+
+                     {default} reduce 80
+
+State 135:
+          id ::= * ID
+          id ::= * STRING
+          having_opt ::= HAVING * expr
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  136
+                            id shift  58
+
+State 136:
+     (88) having_opt ::= HAVING expr *
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                           AND shift  56
+                       BETWEEN shift  97
+                        CONCAT shift  93
+                            EQ shift  76
+                            GE shift  72
+                          GLOB shift  83
+                            GT shift  68
+                            IN shift  101
+                        ISNULL shift  95
+                            LE shift  70
+                          LIKE shift  78
+                            LT shift  66
+                         MINUS shift  87
+                            NE shift  74
+                           NOT shift  80
+                       NOTNULL shift  96
+                            OR shift  64
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+                     {default} reduce 88
+
+State 137:
+          groupby_opt ::= GROUP * BY exprlist
+
+                            BY shift  138
+
+State 138:
+          id ::= * ID
+          id ::= * STRING
+          groupby_opt ::= GROUP BY * exprlist
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+          exprlist ::= * exprlist COMMA expritem
+          exprlist ::= * expritem
+          expritem ::= * expr
+    (152) expritem ::= *
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  109
+                      expritem shift  120
+                      exprlist shift  139
+                            id shift  58
+                     {default} reduce 152
+
+State 139:
+     (86) groupby_opt ::= GROUP BY exprlist *
+          exprlist ::= exprlist * COMMA expritem
+
+                         COMMA shift  118
+                     {default} reduce 86
+
+State 140:
+          id ::= * ID
+          id ::= * STRING
+          where_opt ::= WHERE * expr
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  141
+                            id shift  58
+
+State 141:
+     (91) where_opt ::= WHERE expr *
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                           AND shift  56
+                       BETWEEN shift  97
+                        CONCAT shift  93
+                            EQ shift  76
+                            GE shift  72
+                          GLOB shift  83
+                            GT shift  68
+                            IN shift  101
+                        ISNULL shift  95
+                            LE shift  70
+                          LIKE shift  78
+                            LT shift  66
+                         MINUS shift  87
+                            NE shift  74
+                           NOT shift  80
+                       NOTNULL shift  96
+                            OR shift  64
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+                     {default} reduce 91
+
+State 142:
+     (65) sclp ::= selcollist COMMA *
+
+                     {default} reduce 65
+
+State 143:
+          from ::= FROM * seltablist
+          stl_prefix ::= * seltablist COMMA
+     (74) stl_prefix ::= *
+          seltablist ::= * stl_prefix id
+          seltablist ::= * stl_prefix id as id
+
+                    seltablist shift  144
+                    stl_prefix shift  146
+                     {default} reduce 74
+
+State 144:
+     (72) from ::= FROM seltablist *
+          stl_prefix ::= seltablist * COMMA
+
+                         COMMA shift  145
+                     {default} reduce 72
+
+State 145:
+     (73) stl_prefix ::= seltablist COMMA *
+
+                     {default} reduce 73
+
+State 146:
+          id ::= * ID
+          id ::= * STRING
+          seltablist ::= stl_prefix * id
+          seltablist ::= stl_prefix * id as id
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  147
+
+State 147:
+     (70) as ::= *
+          as ::= * AS
+     (75) seltablist ::= stl_prefix id *
+          seltablist ::= stl_prefix id * as id
+
+                             $ reduce 75
+                            AS shift  148
+                         COMMA reduce 75
+                        EXCEPT reduce 75
+                         GROUP reduce 75
+                        HAVING reduce 75
+                            ID reduce 70
+                     INTERSECT reduce 75
+                         ORDER reduce 75
+                            RP reduce 75
+                          SEMI reduce 75
+                        STRING reduce 70
+                         UNION reduce 75
+                         WHERE reduce 75
+                            as shift  149
+
+State 148:
+     (71) as ::= AS *
+
+                     {default} reduce 71
+
+State 149:
+          id ::= * ID
+          id ::= * STRING
+          seltablist ::= stl_prefix id as * id
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  150
+
+State 150:
+     (76) seltablist ::= stl_prefix id as id *
+
+                     {default} reduce 76
+
+State 151:
+     (67) selcollist ::= STAR *
+
+                     {default} reduce 67
+
+State 152:
+          id ::= * ID
+          id ::= * STRING
+          selcollist ::= sclp * expr
+          selcollist ::= sclp * expr as id
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  153
+                            id shift  58
+
+State 153:
+     (68) selcollist ::= sclp expr *
+          selcollist ::= sclp expr * as id
+     (70) as ::= *
+          as ::= * AS
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                           AND shift  56
+                            AS shift  148
+                       BETWEEN shift  97
+                         COMMA reduce 68
+                        CONCAT shift  93
+                            EQ shift  76
+                          FROM reduce 68
+                            GE shift  72
+                          GLOB shift  83
+                            GT shift  68
+                            ID reduce 70
+                            IN shift  101
+                        ISNULL shift  95
+                            LE shift  70
+                          LIKE shift  78
+                            LT shift  66
+                         MINUS shift  87
+                            NE shift  74
+                           NOT shift  80
+                       NOTNULL shift  96
+                            OR shift  64
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+                        STRING reduce 70
+                            as shift  154
+
+State 154:
+          id ::= * ID
+          id ::= * STRING
+          selcollist ::= sclp expr as * id
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  155
+
+State 155:
+     (69) selcollist ::= sclp expr as id *
+
+                     {default} reduce 69
+
+State 156:
+     (62) distinct ::= DISTINCT *
+
+                     {default} reduce 62
+
+State 157:
+     (63) distinct ::= ALL *
+
+                     {default} reduce 63
+
+State 158:
+    (142) expr ::= LP select RP *
+
+                     {default} reduce 142
+
+State 159:
+          expr ::= LP expr * RP
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                           AND shift  56
+                       BETWEEN shift  97
+                        CONCAT shift  93
+                            EQ shift  76
+                            GE shift  72
+                          GLOB shift  83
+                            GT shift  68
+                            IN shift  101
+                        ISNULL shift  95
+                            LE shift  70
+                          LIKE shift  78
+                            LT shift  66
+                         MINUS shift  87
+                            NE shift  74
+                           NOT shift  80
+                       NOTNULL shift  96
+                            OR shift  64
+                          PLUS shift  85
+                            RP shift  160
+                         SLASH shift  91
+                          STAR shift  89
+
+State 160:
+    (111) expr ::= LP expr RP *
+
+                     {default} reduce 111
+
+State 161:
+          expr ::= ID LP exprlist * RP
+          exprlist ::= exprlist * COMMA expritem
+
+                         COMMA shift  118
+                            RP shift  162
+
+State 162:
+    (118) expr ::= ID LP exprlist RP *
+
+                     {default} reduce 118
+
+State 163:
+          expr ::= ID LP STAR * RP
+
+                            RP shift  164
+
+State 164:
+    (119) expr ::= ID LP STAR RP *
+
+                     {default} reduce 119
+
+State 165:
+          ccons ::= CHECK LP expr * RP
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                           AND shift  56
+                       BETWEEN shift  97
+                        CONCAT shift  93
+                            EQ shift  76
+                            GE shift  72
+                          GLOB shift  83
+                            GT shift  68
+                            IN shift  101
+                        ISNULL shift  95
+                            LE shift  70
+                          LIKE shift  78
+                            LT shift  66
+                         MINUS shift  87
+                            NE shift  74
+                           NOT shift  80
+                       NOTNULL shift  96
+                            OR shift  64
+                          PLUS shift  85
+                            RP shift  166
+                         SLASH shift  91
+                          STAR shift  89
+
+State 166:
+     (41) ccons ::= CHECK LP expr RP *
+
+                     {default} reduce 41
+
+State 167:
+     (28) carg ::= ccons *
+
+                     {default} reduce 28
+
+State 168:
+          carg ::= DEFAULT * STRING
+          carg ::= DEFAULT * ID
+          carg ::= DEFAULT * INTEGER
+          carg ::= DEFAULT * PLUS INTEGER
+          carg ::= DEFAULT * MINUS INTEGER
+          carg ::= DEFAULT * FLOAT
+          carg ::= DEFAULT * PLUS FLOAT
+          carg ::= DEFAULT * MINUS FLOAT
+          carg ::= DEFAULT * NULL
+
+                         FLOAT shift  178
+                            ID shift  170
+                       INTEGER shift  171
+                         MINUS shift  175
+                          NULL shift  179
+                          PLUS shift  172
+                        STRING shift  169
+
+State 169:
+     (29) carg ::= DEFAULT STRING *
+
+                     {default} reduce 29
+
+State 170:
+     (30) carg ::= DEFAULT ID *
+
+                     {default} reduce 30
+
+State 171:
+     (31) carg ::= DEFAULT INTEGER *
+
+                     {default} reduce 31
+
+State 172:
+          carg ::= DEFAULT PLUS * INTEGER
+          carg ::= DEFAULT PLUS * FLOAT
+
+                         FLOAT shift  174
+                       INTEGER shift  173
+
+State 173:
+     (32) carg ::= DEFAULT PLUS INTEGER *
+
+                     {default} reduce 32
+
+State 174:
+     (35) carg ::= DEFAULT PLUS FLOAT *
+
+                     {default} reduce 35
+
+State 175:
+          carg ::= DEFAULT MINUS * INTEGER
+          carg ::= DEFAULT MINUS * FLOAT
+
+                         FLOAT shift  177
+                       INTEGER shift  176
+
+State 176:
+     (33) carg ::= DEFAULT MINUS INTEGER *
+
+                     {default} reduce 33
+
+State 177:
+     (36) carg ::= DEFAULT MINUS FLOAT *
+
+                     {default} reduce 36
+
+State 178:
+     (34) carg ::= DEFAULT FLOAT *
+
+                     {default} reduce 34
+
+State 179:
+     (37) carg ::= DEFAULT NULL *
+
+                     {default} reduce 37
+
+State 180:
+          id ::= * ID
+          id ::= * STRING
+     (17) type ::= typename *
+          type ::= typename * LP signed RP
+          type ::= typename * LP signed COMMA signed RP
+          typename ::= typename * id
+
+                            ID shift  19
+                            LP shift  181
+                        STRING shift  20
+                            id shift  192
+                     {default} reduce 17
+
+State 181:
+          type ::= typename LP * signed RP
+          type ::= typename LP * signed COMMA signed RP
+          signed ::= * INTEGER
+          signed ::= * PLUS INTEGER
+          signed ::= * MINUS INTEGER
+
+                       INTEGER shift  187
+                         MINUS shift  190
+                          PLUS shift  188
+                        signed shift  182
+
+State 182:
+          type ::= typename LP signed * RP
+          type ::= typename LP signed * COMMA signed RP
+
+                         COMMA shift  184
+                            RP shift  183
+
+State 183:
+     (18) type ::= typename LP signed RP *
+
+                     {default} reduce 18
+
+State 184:
+          type ::= typename LP signed COMMA * signed RP
+          signed ::= * INTEGER
+          signed ::= * PLUS INTEGER
+          signed ::= * MINUS INTEGER
+
+                       INTEGER shift  187
+                         MINUS shift  190
+                          PLUS shift  188
+                        signed shift  185
+
+State 185:
+          type ::= typename LP signed COMMA signed * RP
+
+                            RP shift  186
+
+State 186:
+     (19) type ::= typename LP signed COMMA signed RP *
+
+                     {default} reduce 19
+
+State 187:
+     (22) signed ::= INTEGER *
+
+                     {default} reduce 22
+
+State 188:
+          signed ::= PLUS * INTEGER
+
+                       INTEGER shift  189
+
+State 189:
+     (23) signed ::= PLUS INTEGER *
+
+                     {default} reduce 23
+
+State 190:
+          signed ::= MINUS * INTEGER
+
+                       INTEGER shift  191
+
+State 191:
+     (24) signed ::= MINUS INTEGER *
+
+                     {default} reduce 24
+
+State 192:
+     (21) typename ::= typename id *
+
+                     {default} reduce 21
+
+State 193:
+     (20) typename ::= id *
+
+                     {default} reduce 20
+
+State 194:
+     (14) columnid ::= id *
+
+                     {default} reduce 14
+
+State 195:
+     (43) conslist_opt ::= COMMA conslist *
+          conslist ::= conslist * COMMA tcons
+
+                         COMMA shift  196
+                            RP reduce 43
+
+State 196:
+          conslist ::= conslist COMMA * tcons
+          tcons ::= * CONSTRAINT id tcons2
+          tcons ::= * tcons2
+          tcons2 ::= * PRIMARY KEY LP idxlist RP
+          tcons2 ::= * UNIQUE LP idlist RP
+          tcons2 ::= * CHECK expr
+
+                         CHECK shift  217
+                    CONSTRAINT shift  198
+                       PRIMARY shift  201
+                        UNIQUE shift  210
+                         tcons shift  197
+                        tcons2 shift  219
+
+State 197:
+     (44) conslist ::= conslist COMMA tcons *
+
+                     {default} reduce 44
+
+State 198:
+          id ::= * ID
+          id ::= * STRING
+          tcons ::= CONSTRAINT * id tcons2
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  199
+
+State 199:
+          tcons ::= CONSTRAINT id * tcons2
+          tcons2 ::= * PRIMARY KEY LP idxlist RP
+          tcons2 ::= * UNIQUE LP idlist RP
+          tcons2 ::= * CHECK expr
+
+                         CHECK shift  217
+                       PRIMARY shift  201
+                        UNIQUE shift  210
+                        tcons2 shift  200
+
+State 200:
+     (46) tcons ::= CONSTRAINT id tcons2 *
+
+                     {default} reduce 46
+
+State 201:
+          tcons2 ::= PRIMARY * KEY LP idxlist RP
+
+                           KEY shift  202
+
+State 202:
+          tcons2 ::= PRIMARY KEY * LP idxlist RP
+
+                            LP shift  203
+
+State 203:
+          id ::= * ID
+          id ::= * STRING
+          tcons2 ::= PRIMARY KEY LP * idxlist RP
+          idxlist ::= * idxlist COMMA idxitem
+          idxlist ::= * idxitem
+          idxitem ::= * id
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  208
+                       idxitem shift  209
+                       idxlist shift  204
+
+State 204:
+          tcons2 ::= PRIMARY KEY LP idxlist * RP
+          idxlist ::= idxlist * COMMA idxitem
+
+                         COMMA shift  206
+                            RP shift  205
+
+State 205:
+     (48) tcons2 ::= PRIMARY KEY LP idxlist RP *
+
+                     {default} reduce 48
+
+State 206:
+          id ::= * ID
+          id ::= * STRING
+          idxlist ::= idxlist COMMA * idxitem
+          idxitem ::= * id
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  208
+                       idxitem shift  207
+
+State 207:
+    (156) idxlist ::= idxlist COMMA idxitem *
+
+                     {default} reduce 156
+
+State 208:
+    (158) idxitem ::= id *
+
+                     {default} reduce 158
+
+State 209:
+    (157) idxlist ::= idxitem *
+
+                     {default} reduce 157
+
+State 210:
+          tcons2 ::= UNIQUE * LP idlist RP
+
+                            LP shift  211
+
+State 211:
+          id ::= * ID
+          id ::= * STRING
+          tcons2 ::= UNIQUE LP * idlist RP
+          idlist ::= * idlist COMMA id
+          idlist ::= * id
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  216
+                        idlist shift  212
+
+State 212:
+          tcons2 ::= UNIQUE LP idlist * RP
+          idlist ::= idlist * COMMA id
+
+                         COMMA shift  214
+                            RP shift  213
+
+State 213:
+     (49) tcons2 ::= UNIQUE LP idlist RP *
+
+                     {default} reduce 49
+
+State 214:
+          id ::= * ID
+          id ::= * STRING
+          idlist ::= idlist COMMA * id
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  215
+
+State 215:
+     (51) idlist ::= idlist COMMA id *
+
+                     {default} reduce 51
+
+State 216:
+     (52) idlist ::= id *
+
+                     {default} reduce 52
+
+State 217:
+          id ::= * ID
+          id ::= * STRING
+          tcons2 ::= CHECK * expr
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  218
+                            id shift  58
+
+State 218:
+     (50) tcons2 ::= CHECK expr *
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                           AND shift  56
+                       BETWEEN shift  97
+                        CONCAT shift  93
+                            EQ shift  76
+                            GE shift  72
+                          GLOB shift  83
+                            GT shift  68
+                            IN shift  101
+                        ISNULL shift  95
+                            LE shift  70
+                          LIKE shift  78
+                            LT shift  66
+                         MINUS shift  87
+                            NE shift  74
+                           NOT shift  80
+                       NOTNULL shift  96
+                            OR shift  64
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+                     {default} reduce 50
+
+State 219:
+     (47) tcons ::= tcons2 *
+
+                     {default} reduce 47
+
+State 220:
+     (45) conslist ::= tcons *
+
+                     {default} reduce 45
+
+State 221:
+     (12) columnlist ::= column *
+
+                     {default} reduce 12
+
+State 222:
+          create_table ::= CREATE * TABLE id
+          cmd ::= CREATE * uniqueflag INDEX id ON id LP idxlist RP
+          uniqueflag ::= * UNIQUE
+    (155) uniqueflag ::= *
+
+                         INDEX reduce 155
+                         TABLE shift  223
+                        UNIQUE shift  233
+                    uniqueflag shift  225
+
+State 223:
+          create_table ::= CREATE TABLE * id
+          id ::= * ID
+          id ::= * STRING
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  224
+
+State 224:
+      (9) create_table ::= CREATE TABLE id *
+
+                            LP reduce 9
+
+State 225:
+          cmd ::= CREATE uniqueflag * INDEX id ON id LP idxlist RP
+
+                         INDEX shift  226
+
+State 226:
+          id ::= * ID
+          id ::= * STRING
+          cmd ::= CREATE uniqueflag INDEX * id ON id LP idxlist RP
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  227
+
+State 227:
+          cmd ::= CREATE uniqueflag INDEX id * ON id LP idxlist RP
+
+                            ON shift  228
+
+State 228:
+          id ::= * ID
+          id ::= * STRING
+          cmd ::= CREATE uniqueflag INDEX id ON * id LP idxlist RP
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  229
+
+State 229:
+          cmd ::= CREATE uniqueflag INDEX id ON id * LP idxlist RP
+
+                            LP shift  230
+
+State 230:
+          id ::= * ID
+          id ::= * STRING
+          cmd ::= CREATE uniqueflag INDEX id ON id LP * idxlist RP
+          idxlist ::= * idxlist COMMA idxitem
+          idxlist ::= * idxitem
+          idxitem ::= * id
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  208
+                       idxitem shift  209
+                       idxlist shift  231
+
+State 231:
+          cmd ::= CREATE uniqueflag INDEX id ON id LP idxlist * RP
+          idxlist ::= idxlist * COMMA idxitem
+
+                         COMMA shift  206
+                            RP shift  232
+
+State 232:
+    (153) cmd ::= CREATE uniqueflag INDEX id ON id LP idxlist RP *
+
+                     {default} reduce 153
+
+State 233:
+    (154) uniqueflag ::= UNIQUE *
+
+                         INDEX reduce 154
+
+State 234:
+          cmd ::= DROP * TABLE id
+          cmd ::= DROP * INDEX id
+
+                         INDEX shift  237
+                         TABLE shift  235
+
+State 235:
+          id ::= * ID
+          id ::= * STRING
+          cmd ::= DROP TABLE * id
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  236
+
+State 236:
+     (53) cmd ::= DROP TABLE id *
+
+                     {default} reduce 53
+
+State 237:
+          id ::= * ID
+          id ::= * STRING
+          cmd ::= DROP INDEX * id
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  238
+
+State 238:
+    (159) cmd ::= DROP INDEX id *
+
+                     {default} reduce 159
+
+State 239:
+     (54) cmd ::= select *
+          select ::= select * joinop oneselect
+          joinop ::= * UNION
+          joinop ::= * UNION ALL
+          joinop ::= * INTERSECT
+          joinop ::= * EXCEPT
+
+                        EXCEPT shift  107
+                     INTERSECT shift  106
+                         UNION shift  104
+                        joinop shift  39
+                     {default} reduce 54
+
+State 240:
+          cmd ::= DELETE * FROM id where_opt
+
+                          FROM shift  241
+
+State 241:
+          id ::= * ID
+          id ::= * STRING
+          cmd ::= DELETE FROM * id where_opt
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  242
+
+State 242:
+          cmd ::= DELETE FROM id * where_opt
+     (90) where_opt ::= *
+          where_opt ::= * WHERE expr
+
+                         WHERE shift  140
+                     where_opt shift  243
+                     {default} reduce 90
+
+State 243:
+     (89) cmd ::= DELETE FROM id where_opt *
+
+                     {default} reduce 89
+
+State 244:
+          id ::= * ID
+          id ::= * STRING
+          cmd ::= UPDATE * id SET setlist where_opt
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  245
+
+State 245:
+          cmd ::= UPDATE id * SET setlist where_opt
+
+                           SET shift  246
+
+State 246:
+          id ::= * ID
+          id ::= * STRING
+          cmd ::= UPDATE id SET * setlist where_opt
+          setlist ::= * setlist COMMA id EQ expr
+          setlist ::= * id EQ expr
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  253
+                       setlist shift  247
+
+State 247:
+     (90) where_opt ::= *
+          where_opt ::= * WHERE expr
+          cmd ::= UPDATE id SET setlist * where_opt
+          setlist ::= setlist * COMMA id EQ expr
+
+                         COMMA shift  249
+                         WHERE shift  140
+                     where_opt shift  248
+                     {default} reduce 90
+
+State 248:
+     (92) cmd ::= UPDATE id SET setlist where_opt *
+
+                     {default} reduce 92
+
+State 249:
+          id ::= * ID
+          id ::= * STRING
+          setlist ::= setlist COMMA * id EQ expr
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  250
+
+State 250:
+          setlist ::= setlist COMMA id * EQ expr
+
+                            EQ shift  251
+
+State 251:
+          id ::= * ID
+          id ::= * STRING
+          setlist ::= setlist COMMA id EQ * expr
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  252
+                            id shift  58
+
+State 252:
+     (93) setlist ::= setlist COMMA id EQ expr *
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                           AND shift  56
+                       BETWEEN shift  97
+                        CONCAT shift  93
+                            EQ shift  76
+                            GE shift  72
+                          GLOB shift  83
+                            GT shift  68
+                            IN shift  101
+                        ISNULL shift  95
+                            LE shift  70
+                          LIKE shift  78
+                            LT shift  66
+                         MINUS shift  87
+                            NE shift  74
+                           NOT shift  80
+                       NOTNULL shift  96
+                            OR shift  64
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+                     {default} reduce 93
+
+State 253:
+          setlist ::= id * EQ expr
+
+                            EQ shift  254
+
+State 254:
+          id ::= * ID
+          id ::= * STRING
+          setlist ::= id EQ * expr
+          expr ::= * LP expr RP
+          expr ::= * ID
+          expr ::= * NULL
+          expr ::= * id DOT id
+          expr ::= * INTEGER
+          expr ::= * FLOAT
+          expr ::= * STRING
+          expr ::= * ID LP exprlist RP
+          expr ::= * ID LP STAR RP
+          expr ::= * expr AND expr
+          expr ::= * expr OR expr
+          expr ::= * expr LT expr
+          expr ::= * expr GT expr
+          expr ::= * expr LE expr
+          expr ::= * expr GE expr
+          expr ::= * expr NE expr
+          expr ::= * expr EQ expr
+          expr ::= * expr LIKE expr
+          expr ::= * expr NOT LIKE expr
+          expr ::= * expr GLOB expr
+          expr ::= * expr NOT GLOB expr
+          expr ::= * expr PLUS expr
+          expr ::= * expr MINUS expr
+          expr ::= * expr STAR expr
+          expr ::= * expr SLASH expr
+          expr ::= * expr CONCAT expr
+          expr ::= * expr ISNULL
+          expr ::= * expr NOTNULL
+          expr ::= * NOT expr
+          expr ::= * MINUS expr
+          expr ::= * PLUS expr
+          expr ::= * LP select RP
+          expr ::= * expr BETWEEN expr AND expr
+          expr ::= * expr NOT BETWEEN expr AND expr
+          expr ::= * expr IN LP exprlist RP
+          expr ::= * expr IN LP select RP
+          expr ::= * expr NOT IN LP exprlist RP
+          expr ::= * expr NOT IN LP select RP
+
+                         FLOAT shift  62
+                            ID shift  33
+                       INTEGER shift  61
+                            LP shift  36
+                         MINUS shift  112
+                           NOT shift  110
+                          NULL shift  57
+                          PLUS shift  114
+                        STRING shift  35
+                          expr shift  255
+                            id shift  58
+
+State 255:
+     (94) setlist ::= id EQ expr *
+          expr ::= expr * AND expr
+          expr ::= expr * OR expr
+          expr ::= expr * LT expr
+          expr ::= expr * GT expr
+          expr ::= expr * LE expr
+          expr ::= expr * GE expr
+          expr ::= expr * NE expr
+          expr ::= expr * EQ expr
+          expr ::= expr * LIKE expr
+          expr ::= expr * NOT LIKE expr
+          expr ::= expr * GLOB expr
+          expr ::= expr * NOT GLOB expr
+          expr ::= expr * PLUS expr
+          expr ::= expr * MINUS expr
+          expr ::= expr * STAR expr
+          expr ::= expr * SLASH expr
+          expr ::= expr * CONCAT expr
+          expr ::= expr * ISNULL
+          expr ::= expr * NOTNULL
+          expr ::= expr * BETWEEN expr AND expr
+          expr ::= expr * NOT BETWEEN expr AND expr
+          expr ::= expr * IN LP exprlist RP
+          expr ::= expr * IN LP select RP
+          expr ::= expr * NOT IN LP exprlist RP
+          expr ::= expr * NOT IN LP select RP
+
+                           AND shift  56
+                       BETWEEN shift  97
+                        CONCAT shift  93
+                            EQ shift  76
+                            GE shift  72
+                          GLOB shift  83
+                            GT shift  68
+                            IN shift  101
+                        ISNULL shift  95
+                            LE shift  70
+                          LIKE shift  78
+                            LT shift  66
+                         MINUS shift  87
+                            NE shift  74
+                           NOT shift  80
+                       NOTNULL shift  96
+                            OR shift  64
+                          PLUS shift  85
+                         SLASH shift  91
+                          STAR shift  89
+                     {default} reduce 94
+
+State 256:
+          cmd ::= INSERT * INTO id inscollist_opt VALUES LP itemlist RP
+          cmd ::= INSERT * INTO id inscollist_opt select
+
+                          INTO shift  257
+
+State 257:
+          id ::= * ID
+          id ::= * STRING
+          cmd ::= INSERT INTO * id inscollist_opt VALUES LP itemlist RP
+          cmd ::= INSERT INTO * id inscollist_opt select
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  258
+
+State 258:
+          cmd ::= INSERT INTO id * inscollist_opt VALUES LP itemlist RP
+          cmd ::= INSERT INTO id * inscollist_opt select
+    (107) inscollist_opt ::= *
+          inscollist_opt ::= * LP inscollist RP
+
+                            LP shift  278
+                inscollist_opt shift  259
+                     {default} reduce 107
+
+State 259:
+          select ::= * oneselect
+          select ::= * select joinop oneselect
+          oneselect ::= * SELECT distinct selcollist from where_opt groupby_opt having_opt orderby_opt
+          cmd ::= INSERT INTO id inscollist_opt * VALUES LP itemlist RP
+          cmd ::= INSERT INTO id inscollist_opt * select
+
+                        SELECT shift  41
+                        VALUES shift  261
+                     oneselect shift  37
+                        select shift  260
+
+State 260:
+          select ::= select * joinop oneselect
+          joinop ::= * UNION
+          joinop ::= * UNION ALL
+          joinop ::= * INTERSECT
+          joinop ::= * EXCEPT
+     (96) cmd ::= INSERT INTO id inscollist_opt select *
+
+                        EXCEPT shift  107
+                     INTERSECT shift  106
+                         UNION shift  104
+                        joinop shift  39
+                     {default} reduce 96
+
+State 261:
+          cmd ::= INSERT INTO id inscollist_opt VALUES * LP itemlist RP
+
+                            LP shift  262
+
+State 262:
+          cmd ::= INSERT INTO id inscollist_opt VALUES LP * itemlist RP
+          itemlist ::= * itemlist COMMA item
+          itemlist ::= * item
+          item ::= * INTEGER
+          item ::= * PLUS INTEGER
+          item ::= * MINUS INTEGER
+          item ::= * FLOAT
+          item ::= * PLUS FLOAT
+          item ::= * MINUS FLOAT
+          item ::= * STRING
+          item ::= * NULL
+
+                         FLOAT shift  274
+                       INTEGER shift  267
+                         MINUS shift  271
+                          NULL shift  276
+                          PLUS shift  268
+                        STRING shift  275
+                          item shift  277
+                      itemlist shift  263
+
+State 263:
+          cmd ::= INSERT INTO id inscollist_opt VALUES LP itemlist * RP
+          itemlist ::= itemlist * COMMA item
+
+                         COMMA shift  265
+                            RP shift  264
+
+State 264:
+     (95) cmd ::= INSERT INTO id inscollist_opt VALUES LP itemlist RP *
+
+                     {default} reduce 95
+
+State 265:
+          itemlist ::= itemlist COMMA * item
+          item ::= * INTEGER
+          item ::= * PLUS INTEGER
+          item ::= * MINUS INTEGER
+          item ::= * FLOAT
+          item ::= * PLUS FLOAT
+          item ::= * MINUS FLOAT
+          item ::= * STRING
+          item ::= * NULL
+
+                         FLOAT shift  274
+                       INTEGER shift  267
+                         MINUS shift  271
+                          NULL shift  276
+                          PLUS shift  268
+                        STRING shift  275
+                          item shift  266
+
+State 266:
+     (97) itemlist ::= itemlist COMMA item *
+
+                     {default} reduce 97
+
+State 267:
+     (99) item ::= INTEGER *
+
+                     {default} reduce 99
+
+State 268:
+          item ::= PLUS * INTEGER
+          item ::= PLUS * FLOAT
+
+                         FLOAT shift  270
+                       INTEGER shift  269
+
+State 269:
+    (100) item ::= PLUS INTEGER *
+
+                     {default} reduce 100
+
+State 270:
+    (103) item ::= PLUS FLOAT *
+
+                     {default} reduce 103
+
+State 271:
+          item ::= MINUS * INTEGER
+          item ::= MINUS * FLOAT
+
+                         FLOAT shift  273
+                       INTEGER shift  272
+
+State 272:
+    (101) item ::= MINUS INTEGER *
+
+                     {default} reduce 101
+
+State 273:
+    (104) item ::= MINUS FLOAT *
+
+                     {default} reduce 104
+
+State 274:
+    (102) item ::= FLOAT *
+
+                     {default} reduce 102
+
+State 275:
+    (105) item ::= STRING *
+
+                     {default} reduce 105
+
+State 276:
+    (106) item ::= NULL *
+
+                     {default} reduce 106
+
+State 277:
+     (98) itemlist ::= item *
+
+                     {default} reduce 98
+
+State 278:
+          id ::= * ID
+          id ::= * STRING
+          inscollist_opt ::= LP * inscollist RP
+          inscollist ::= * inscollist COMMA id
+          inscollist ::= * id
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  283
+                    inscollist shift  279
+
+State 279:
+          inscollist_opt ::= LP inscollist * RP
+          inscollist ::= inscollist * COMMA id
+
+                         COMMA shift  281
+                            RP shift  280
+
+State 280:
+    (108) inscollist_opt ::= LP inscollist RP *
+
+                     {default} reduce 108
+
+State 281:
+          id ::= * ID
+          id ::= * STRING
+          inscollist ::= inscollist COMMA * id
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  282
+
+State 282:
+    (109) inscollist ::= inscollist COMMA id *
+
+                     {default} reduce 109
+
+State 283:
+    (110) inscollist ::= id *
+
+                     {default} reduce 110
+
+State 284:
+          id ::= * ID
+          id ::= * STRING
+          cmd ::= COPY * id FROM id USING DELIMITERS STRING
+          cmd ::= COPY * id FROM id
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  285
+
+State 285:
+          cmd ::= COPY id * FROM id USING DELIMITERS STRING
+          cmd ::= COPY id * FROM id
+
+                          FROM shift  286
+
+State 286:
+          id ::= * ID
+          id ::= * STRING
+          cmd ::= COPY id FROM * id USING DELIMITERS STRING
+          cmd ::= COPY id FROM * id
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  287
+
+State 287:
+          cmd ::= COPY id FROM id * USING DELIMITERS STRING
+    (161) cmd ::= COPY id FROM id *
+
+                         USING shift  288
+                     {default} reduce 161
+
+State 288:
+          cmd ::= COPY id FROM id USING * DELIMITERS STRING
+
+                    DELIMITERS shift  289
+
+State 289:
+          cmd ::= COPY id FROM id USING DELIMITERS * STRING
+
+                        STRING shift  290
+
+State 290:
+    (160) cmd ::= COPY id FROM id USING DELIMITERS STRING *
+
+                     {default} reduce 160
+
+State 291:
+          id ::= * ID
+          id ::= * STRING
+    (162) cmd ::= VACUUM *
+          cmd ::= VACUUM * id
+
+                            ID shift  19
+                        STRING shift  20
+                            id shift  292
+                     {default} reduce 162
+
+State 292:
+    (163) cmd ::= VACUUM id *
+
+                     {default} reduce 163
+
+State 293:
+      (5) ecmd ::= cmd *
+
+                     {default} reduce 5
+
+State 294:
+      (7) explain ::= EXPLAIN *
+
+                     {default} reduce 7
+
+State 295:
+          input ::= END_OF_FILE * ILLEGAL SPACE UNCLOSED_STRING COMMENT FUNCTION UMINUS COLUMN AGG_FUNCTION
+
+                       ILLEGAL shift  296
+
+State 296:
+          input ::= END_OF_FILE ILLEGAL * SPACE UNCLOSED_STRING COMMENT FUNCTION UMINUS COLUMN AGG_FUNCTION
+
+                         SPACE shift  297
+
+State 297:
+          input ::= END_OF_FILE ILLEGAL SPACE * UNCLOSED_STRING COMMENT FUNCTION UMINUS COLUMN AGG_FUNCTION
+
+               UNCLOSED_STRING shift  298
+
+State 298:
+          input ::= END_OF_FILE ILLEGAL SPACE UNCLOSED_STRING * COMMENT FUNCTION UMINUS COLUMN AGG_FUNCTION
+
+                       COMMENT shift  299
+
+State 299:
+          input ::= END_OF_FILE ILLEGAL SPACE UNCLOSED_STRING COMMENT * FUNCTION UMINUS COLUMN AGG_FUNCTION
+
+                      FUNCTION shift  300
+
+State 300:
+          input ::= END_OF_FILE ILLEGAL SPACE UNCLOSED_STRING COMMENT FUNCTION * UMINUS COLUMN AGG_FUNCTION
+
+                        UMINUS shift  301
+
+State 301:
+          input ::= END_OF_FILE ILLEGAL SPACE UNCLOSED_STRING COMMENT FUNCTION UMINUS * COLUMN AGG_FUNCTION
+
+                        COLUMN shift  302
+
+State 302:
+          input ::= END_OF_FILE ILLEGAL SPACE UNCLOSED_STRING COMMENT FUNCTION UMINUS COLUMN * AGG_FUNCTION
+
+                  AGG_FUNCTION shift  303
+
+State 303:
+      (1) input ::= END_OF_FILE ILLEGAL SPACE UNCLOSED_STRING COMMENT FUNCTION UMINUS COLUMN AGG_FUNCTION *
+
+                             $ reduce 1
+
+State 304:
+      (2) cmdlist ::= ecmd *
+
+                     {default} reduce 2
+

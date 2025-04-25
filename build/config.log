@@ -1,0 +1,231 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:604: checking for gcc
+configure:717: checking whether the C compiler (clang -std=c89 ) works
+configure:733: clang -o conftest -std=c89   conftest.c  1>&5
+configure:759: checking whether the C compiler (clang -std=c89 ) is a cross-compiler
+configure:764: checking whether we are using GNU C
+configure:773: clang -E conftest.c
+configure:792: checking whether clang accepts -g
+configure:836: checking switches for the host compiler
+configure:856: checking target compiler
+configure:864: checking switches on the target compiler
+configure:872: checking target linker
+configure:880: checking switches on the target compiler
+configure:892: checking for ranlib
+configure:938: checking if host and target compilers are the same
+configure:953: checking if executables have the .exe suffix
+configure:962: checking for Cygwin environment
+configure:978: clang -c -std=c89  conftest.c 1>&5
+configure:974:8: error: use of undeclared identifier '__CYGWIN32__'
+return __CYGWIN__;
+       ^
+configure:972:20: note: expanded from macro '__CYGWIN__'
+#define __CYGWIN__ __CYGWIN32__
+                   ^
+1 error generated.
+configure: failed program was:
+#line 967 "configure"
+#include "confdefs.h"
+
+int main() {
+
+#ifndef __CYGWIN__
+#define __CYGWIN__ __CYGWIN32__
+#endif
+return __CYGWIN__;
+; return 0; }
+configure:1042: checking for sin
+configure:1070: clang -o conftest -std=c89   conftest.c  1>&5
+configure:1054:6: warning: incompatible redeclaration of library function 'sin' [-Wincompatible-library-redeclaration]
+char sin();
+     ^
+configure:1054:6: note: 'sin' is a builtin with type 'double (double)'
+1 warning generated.
+/usr/bin/ld: /tmp/conftest-7e4ff3.o: in function `main':
+conftest.c:(.text+0x12): undefined reference to `sin'
+clang-14: error: linker command failed with exit code 1 (use -v to see invocation)
+configure: failed program was:
+#line 1047 "configure"
+#include "confdefs.h"
+/* System header to define __stub macros and hopefully few prototypes,
+    which can conflict with char sin(); below.  */
+#include <assert.h>
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char sin();
+
+int main() {
+
+/* The GNU C library defines this for functions which it implements
+    to always fail with ENOSYS.  Some functions are actually named
+    something starting with __ and the normal name is an alias.  */
+#if defined (__stub_sin) || defined (__stub___sin)
+choke me
+#else
+sin();
+#endif
+
+; return 0; }
+configure:1091: checking for dlopen in -ldl
+configure:1110: clang -o conftest -std=c89   conftest.c -ldl  -lm 1>&5
+configure:1144: checking for library containing Tcl_Init
+configure:1162: clang -o conftest -std=c89   conftest.c  1>&5
+/usr/bin/ld: /tmp/conftest-b34560.o: in function `main':
+conftest.c:(.text+0x12): undefined reference to `Tcl_Init'
+clang-14: error: linker command failed with exit code 1 (use -v to see invocation)
+configure: failed program was:
+#line 1151 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char Tcl_Init();
+
+int main() {
+Tcl_Init()
+; return 0; }
+configure:1184: clang -o conftest -std=c89   conftest.c -ltcl8.4 -ldl -lm  1>&5
+/usr/bin/ld: cannot find -ltcl8.4
+clang-14: error: linker command failed with exit code 1 (use -v to see invocation)
+configure: failed program was:
+#line 1173 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char Tcl_Init();
+
+int main() {
+Tcl_Init()
+; return 0; }
+configure:1184: clang -o conftest -std=c89   conftest.c -ltcl8.3 -ldl -lm  1>&5
+/usr/bin/ld: cannot find -ltcl8.3
+clang-14: error: linker command failed with exit code 1 (use -v to see invocation)
+configure: failed program was:
+#line 1173 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char Tcl_Init();
+
+int main() {
+Tcl_Init()
+; return 0; }
+configure:1184: clang -o conftest -std=c89   conftest.c -ltcl8.2 -ldl -lm  1>&5
+/usr/bin/ld: cannot find -ltcl8.2
+clang-14: error: linker command failed with exit code 1 (use -v to see invocation)
+configure: failed program was:
+#line 1173 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char Tcl_Init();
+
+int main() {
+Tcl_Init()
+; return 0; }
+configure:1184: clang -o conftest -std=c89   conftest.c -ltcl8.1 -ldl -lm  1>&5
+/usr/bin/ld: cannot find -ltcl8.1
+clang-14: error: linker command failed with exit code 1 (use -v to see invocation)
+configure: failed program was:
+#line 1173 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char Tcl_Init();
+
+int main() {
+Tcl_Init()
+; return 0; }
+configure:1184: clang -o conftest -std=c89   conftest.c -ltcl8.0 -ldl -lm  1>&5
+/usr/bin/ld: cannot find -ltcl8.0
+clang-14: error: linker command failed with exit code 1 (use -v to see invocation)
+configure: failed program was:
+#line 1173 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char Tcl_Init();
+
+int main() {
+Tcl_Init()
+; return 0; }
+configure:1184: clang -o conftest -std=c89   conftest.c -ltcl80 -ldl -lm  1>&5
+/usr/bin/ld: cannot find -ltcl80
+clang-14: error: linker command failed with exit code 1 (use -v to see invocation)
+configure: failed program was:
+#line 1173 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char Tcl_Init();
+
+int main() {
+Tcl_Init()
+; return 0; }
+configure:1184: clang -o conftest -std=c89   conftest.c -ltcl -ldl -lm  1>&5
+configure:1213: checking TCL header files
+configure:1232: checking how to run the C preprocessor
+configure:1253: clang -E  conftest.c >/dev/null 2>conftest.out
+configure:1313: checking for tcl.h
+configure:1323: clang -E  conftest.c >/dev/null 2>conftest.out
+configure:1391: checking for library containing gdbm_open
+configure:1409: clang -o conftest -std=c89   conftest.c  1>&5
+/usr/bin/ld: /tmp/conftest-6a8195.o: in function `main':
+conftest.c:(.text+0x12): undefined reference to `gdbm_open'
+clang-14: error: linker command failed with exit code 1 (use -v to see invocation)
+configure: failed program was:
+#line 1398 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char gdbm_open();
+
+int main() {
+gdbm_open()
+; return 0; }
+configure:1431: clang -o conftest -std=c89   conftest.c -lgdbm   1>&5
+configure:1459: checking GDBM header files
+configure:1471: checking for gdbm.h
+configure:1481: clang -E  conftest.c >/dev/null 2>conftest.out
+configure:1549: checking for library containing readline
+configure:1567: clang -o conftest -std=c89   conftest.c  1>&5
+/usr/bin/ld: /tmp/conftest-45861e.o: in function `main':
+conftest.c:(.text+0x12): undefined reference to `readline'
+clang-14: error: linker command failed with exit code 1 (use -v to see invocation)
+configure: failed program was:
+#line 1556 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char readline();
+
+int main() {
+readline()
+; return 0; }
+configure:1589: clang -o conftest -std=c89   conftest.c -lreadline   1>&5
+configure:1617: checking readline header files
+configure:1629: checking for readline.h
+configure:1639: clang -E  conftest.c >/dev/null 2>conftest.out
+configure:1635:10: fatal error: 'readline.h' file not found
+#include <readline.h>
+         ^~~~~~~~~~~~
+1 error generated.
+configure: failed program was:
+#line 1634 "configure"
+#include "confdefs.h"
+#include <readline.h>
+configure:1666: checking for /usr/include/readline.h
+configure:1695: checking for /usr/include/readline/readline.h
+configure:1739: checking for usleep
+configure:1767: clang -o conftest -std=c89   conftest.c -lreadline  1>&5
